@@ -3,11 +3,11 @@ import Header from "./Header"
 import HeroSection from "./HeroSection";
 import Card from "./Card";
 import 'bootstrap/dist/css/bootstrap.min.css';
-import {useQuery , gql } from "@apollo/client";
+import {useQuery , gql  , useMutation} from "@apollo/client";
 import Featured from "./Featured";
 import Character from "./Character";
 import CharacterFilter from "./CharacterFilter";
-
+import React from "react";
 
 
 const HEROES = gql`
@@ -38,6 +38,7 @@ const HEROESLIST = gql`
 `
 
 
+
 const Body = () =>{
     const {loading, error ,data} = useQuery(HEROES);
     const a = loading ? 'Loading...' : '';
@@ -53,7 +54,11 @@ const Body = () =>{
             {a} {b}
             <div className="row">
                 {data?.heroes.map((item)=>{
-                    return <Card  src={item.image} snapped={item.snapped} power={item.power} name={item.name} views={item.views}/>
+                    return(
+                   
+                    <Card id={item.id} src={item.image} snapped={item.snapped} power={item.power} name={item.name} views={item.views}/>
+                    
+                    )
                 })}
             </div>
         </div>
